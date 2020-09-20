@@ -1,3 +1,5 @@
+import 'package:DartQuiz/answer.dart';
+import 'package:DartQuiz/question.dart';
 import 'package:flutter/material.dart';
 
 main() {
@@ -14,9 +16,18 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   var questionIndex = 0;
   var questions = [
-    'What is your favorite Color?',
-    'What is your favorite place?',
-    'Where do you live?'
+    {
+      'questionText': 'What is your favorite Color?',
+      'answerValues': ['Red', 'green', 'Blue', 'Black']
+    },
+    {
+      'questionText': 'What is your favorite place?',
+      'answerValues': ['Chennai', 'Home', 'Beach', 'Mountain']
+    },
+    {
+      'questionText': 'What is your favorite dish?',
+      'answerValues': ['Idli', 'Dosa', 'Chappathi', 'Pongal']
+    }
   ];
 
   void changeQuestion() {
@@ -34,18 +45,9 @@ class MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Text(questions[questionIndex]),
-            Row(
-              children: [
-                RaisedButton(onPressed: changeQuestion),
-              ],
-            ),
-            Row(children: [
-              RaisedButton(onPressed: changeQuestion),
-            ]),
-            Row(children: [
-              RaisedButton(onPressed: changeQuestion),
-            ]),
+            Question(questions[questionIndex]['questionText']),
+            ...(questions[questionIndex]['answerValues'] as List<String>)
+                .map((answer) => Answer(answer, changeQuestion)),
           ],
         ),
       ),
