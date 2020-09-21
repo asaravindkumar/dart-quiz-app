@@ -46,6 +46,13 @@ class MyAppState extends State<MyApp> {
     }
   ];
 
+  void resetQuiz() {
+    setState(() {
+      questionIndex = 0;
+      finalScore = 0;
+    });
+  }
+
   void changeQuestion(int score) {
     finalScore += score;
     setState(() {
@@ -69,7 +76,7 @@ class MyAppState extends State<MyApp> {
                     questionIndex: questionIndex,
                     changeQuestion: changeQuestion,
                   )
-                : Finish()
+                : Finish(resetQuiz)
           ],
         ),
       ),
